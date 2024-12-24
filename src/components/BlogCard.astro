@@ -5,15 +5,22 @@ interface Props {
   excerpt: string;
   date: string;
   slug: string;
+  showDate?: boolean;
 }
 
-const { title, image, excerpt, date, slug } = Astro.props;
+const { title, image, excerpt, date, showDate = true, slug } = Astro.props;
+
+// [2024-12-24] Added showDate prop to hide the date on the homepage. showDate?: boolean
 ---
 
-<article class="bg-white rounded-lg shadow-md overflow-hidden">
-  <img src={image} alt={title} class="w-full h-48 object-cover" />
-  <div class="p-6">
-    <time class="text-sm text-gray-500">{date}</time>
+<article class="overflow-hidden">
+  <img
+    src={image}
+    alt={title}
+    class="w-full h-80 object-cover shadow-md rounded-lg"
+  />
+  <div class="pt-4">
+    {showDate && <time class="text-sm text-gray-500">{date}</time>}
     <h2 class="text-xl font-semibold mt-2">
       <a href={`/blog/${slug}`} class="hover:text-blue-600 transition-colors">
         {title}

@@ -30,6 +30,7 @@ const recentPosts = posts.slice(0, 4);
               image={post.data.featured_image.url}
               excerpt={post.data.excerpt}
               date={new Date(post.first_publication_date).toLocaleDateString()}
+              showDate={false}
               slug={post.uid}
             />
           ))
