@@ -5,16 +5,24 @@ import BlogCard from "../components/BlogCard.astro";
 import { asText } from "@prismicio/helpers"; // Import the asText function
 
 const posts = await getBlogPosts();
-const recentPosts = posts.slice(0, 3);
+const recentPosts = posts.slice(0, 4);
 ---
 
 <Layout title="Visual Story Blog">
-  <main class="max-w-6xl mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold text-center mb-8">Welcome to Visual Story</h1>
+  <main class="max-w-6xl mx-auto px-4 py-20">
+    <div class="flex flex-col items-center mb-40">
+      <h1 class="text-5xl font-bold text-center mb-4">Johnathon Doeman</h1>
+      <h3 class="text-xl font-bold mb-4 text-center">PHOTOGRAPHY</h3>
+      <p class="text-center text-xl w-3/5">
+        I'm passionate about crafting visual stories. Traveling to uncharted
+        territories, I seek out enchanting locales, uncovering the magic that
+        hides within the world.
+      </p>
+    </div>
 
     <section class="mb-12">
       <h2 class="text-2xl font-semibold mb-6">Recent Blog Posts</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {
           recentPosts.map((post) => (
             <BlogCard
