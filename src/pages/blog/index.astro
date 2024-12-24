@@ -1,0 +1,29 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import { getBlogPosts } from "../../lib/prismic";
+import { asText } from "@prismicio/helpers"; // Import the asText function
+
+const posts = await getBlogPosts();
+---
+
+<Layout title="Blog - Visual Story">
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-center mb-8">Blog</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        posts.map((post) => {
+          return (
+            <BlogCard
+              title={asText(post.data.title)}
+              image={post.data.featured_image.url}
+              excerpt={post.data.excerpt}
+              date={new Date(post.first_publication_date).toLocaleDateString()}
+              slug={post.uid}
+            />
+          );
+        })
+      }
+    </div>
+  </main>
+</Layout>

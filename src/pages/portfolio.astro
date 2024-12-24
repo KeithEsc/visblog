@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ImageGallery from '../components/ImageGallery';
+import { getPortfolioItems } from '../lib/prismic';
+
+const portfolioItems = await getPortfolioItems();
+const images = portfolioItems.map(item => ({
+  url: item.data.image.url,
+  alt: item.data.title
+}));
+---
+
+<Layout title="Portfolio - Visual Story">
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-center mb-8">Portfolio</h1>
+    <ImageGallery images={images} client:load />
+  </main>
+</Layout>

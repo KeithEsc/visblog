@@ -1,0 +1,59 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { client } from "../../lib/prismic";
+import { asText } from "@prismicio/helpers";
+
+export async function getStaticPaths() {
+  const posts = await client.getAllByType("blog_post");
+  const validPosts = posts.filter((post) => post.uid);
+
+  if (validPosts.length === 0) {
+    return [
+      {
+        params: { slug: "no-posts" },
+        props: {
+          error: true,
+          message: "No blog posts available yet.",
+        },
+      },
+    ];
+  }
+
+  return validPosts.map((post) => ({
+    params: { slug: post.uid },
+    props: { post, error: false },
+  }));
+}
+
+const { post, error, message } = Astro.props;
+---
+
+<Layout
+  title={error ? "Blog - Visual Story" : asText(post.data.title) || "Blog Post"}
+>
+  {
+    error ? (
+      <main class="max-w-4xl mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-8">Blog</h1>
+        <p class="text-center text-gray-600">{message}</p>
+      </main>
+    ) : (
+      <article class="max-w-4xl mx-auto px-4 py-8">
+        <img
+          src={post.data.featured_image?.url || "/default-image.jpg"}
+          alt={post.data.featured_image?.alt || "Blog post image"}
+          class="w-full h-96 object-cover rounded-lg mb-8"
+        />
+        <h1 class="text-4xl font-bold mb-4">
+          {asText(post.data.title) || "Blog Post"}
+        </h1>
+        <time class="text-gray-500 mb-8 block">
+          {new Date(post.first_publication_date).toLocaleDateString()}
+        </time>
+        <div class="prose max-w-none">
+          {asText(post.data.content) || "Content coming soon..."}
+        </div>
+      </article>
+    )
+  }
+</Layout>
