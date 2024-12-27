@@ -9,32 +9,76 @@ const recentPosts = posts.slice(0, 4);
 ---
 
 <Layout title="Visual Story Blog">
-  <main class="max-w-6xl mx-auto px-4 py-20">
+  <main class="max-w-6xl mx-auto px-4 py-28">
     <div class="flex flex-col items-center mb-40">
-      <h1 class="text-5xl font-bold text-center mb-4">Johnathon Doeman</h1>
-      <h3 class="text-xl font-bold mb-4 text-center">PHOTOGRAPHY</h3>
-      <p class="text-center text-xl w-3/5">
-        I'm passionate about crafting visual stories. Traveling to uncharted
-        territories, I seek out enchanting locales, uncovering the magic that
-        hides within the world.
+      <h1
+        class="text-5xl lg:text-6xl font-bold text-center mb-4 text-blue-900 tracking-tighter"
+      >
+        Johnathon Doeman
+      </h1>
+      <h3 class="text-base font-bold mb-6 text-center">PHOTOGRAPHY</h3>
+      <p class="text-center text-xl w-5/6 lg:w-4/6">
+        I'm passionate about crafting visual stories.<br />Traveling to
+        uncharted territories, I seek out enchanting locales, uncovering the
+        magic that hides within the world.
       </p>
     </div>
 
-    <section class="mb-12">
-      <h2 class="text-2xl font-semibold mb-6">Recent Blog Posts</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {
-          recentPosts.map((post) => (
-            <BlogCard
-              title={asText(post.data.title)}
-              image={post.data.featured_image.url}
-              excerpt={post.data.excerpt}
-              date={new Date(post.first_publication_date).toLocaleDateString()}
-              showDate={false}
-              slug={post.uid}
-            />
-          ))
-        }
+    <section class="mb-12 w-full">
+      <div class="w-80 mx-auto lg:w-5/6">
+        <div class="flex flex-col lg:flex-row justify-between mx-auto">
+          <div>
+            <h2
+              class="text-2xl lg:text-3xl lg:leading-7 font-bold mb-2 tracking-tight"
+            >
+              <span class="text-blue-900 mb-auto font-bold">Explore</span> my latest
+              visual <span class="hidden lg:inline"><br /></span>stories on my
+              blog
+            </h2>
+            <p class="mb-6 flex items-center">
+              View all stories <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-4 h-4 ml-2 text-blue-900 leading-none align-middle"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"></path>
+              </svg>
+            </p>
+          </div>
+          <p class="inline-flex">
+            or check my last posts on <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              class="w-4 h-4 ml-2 mt-1"
+              ><path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+              ></path></svg
+            >
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {
+            recentPosts.map((post) => (
+              <BlogCard
+                title={asText(post.data.title)}
+                image={post.data.featured_image.url}
+                excerpt={post.data.excerpt}
+                date={new Date(
+                  post.first_publication_date
+                ).toLocaleDateString()}
+                showDate={false}
+                slug={post.uid}
+              />
+            ))
+          }
+        </div>
       </div>
     </section>
   </main>

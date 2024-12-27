@@ -17,12 +17,15 @@ const { title, image, excerpt, date, showDate = true, slug } = Astro.props;
   <img
     src={image}
     alt={title}
-    class="w-full h-80 object-cover shadow-md rounded-lg"
+    class="w-full h-72 object-cover shadow-md rounded-lg"
   />
   <div class="pt-4">
     {showDate && <time class="text-sm text-gray-500">{date}</time>}
     <h2 class="text-xl font-semibold mt-2">
-      <a href={`/blog/${slug}`} class="hover:text-blue-600 transition-colors">
+      <a
+        href={`/blog/${slug}`}
+        class="hover:text-blue-600 transition-colors text-base font-medium"
+      >
         {title}
       </a>
     </h2>
